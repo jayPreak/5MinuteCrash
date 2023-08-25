@@ -9,7 +9,7 @@ function Overlay() {
   return (
     <>
       <App />
-      <div className="dot" />
+      {/* <div className="dot" /> */}
       <div
         className={`fullscreen bg ${ready ? "ready" : "notready"} ${
           ready && "clicked"
@@ -19,7 +19,7 @@ function Overlay() {
           <button className="wide-button" onClick={() => set(true)}>
             PLAY
           </button>
-          <button className="wide-button">Choose Weapon</button>
+          <button className="wide-button text-xs">Choose Weapon</button>
           <button className="wide-button">Options</button>
         </div>
         {/* <Foo wilter date="26. July" year="2023" /> */}

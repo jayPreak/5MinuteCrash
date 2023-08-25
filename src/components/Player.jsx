@@ -6,7 +6,12 @@ import { useKeyboardControls } from "@react-three/drei";
 import { CapsuleCollider, RigidBody, useRapier } from "@react-three/rapier";
 import Gun from "./Gun";
 
-const SPEED = 5;
+const SPEED = 10;
+// const speed = 300;
+const bulletSpeed = 30;
+const bulletCoolDown = 300;
+const jumpSpeed = 5;
+const jumpCoolDown = 400;
 const direction = new THREE.Vector3();
 const frontVector = new THREE.Vector3();
 const sideVector = new THREE.Vector3();
