@@ -16,12 +16,16 @@ function Overlay() {
         }`}
       >
         <div className="stack">
-          <button onClick={() => set(true)}>PLAY</button>
+          <button className="wide-button" onClick={() => set(true)}>
+            PLAY
+          </button>
+          <button className="wide-button">Choose Weapon</button>
+          <button className="wide-button">Options</button>
         </div>
         {/* <Foo wilter date="26. July" year="2023" /> */}
         <h1 className="absolute top-10 text-8xl font-extrabold text-gray-900 ">
           <span className="text-transparent bg-clip-text bg-gradient-to-r to-[#f0b2bc] from-[#a90000]">
-            Zero Fighter
+            ZeroFighter
           </span>
         </h1>
         <footer

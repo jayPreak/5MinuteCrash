@@ -103,9 +103,18 @@ button {
 .stack {
   width: 100%;
   display: flex;
-  justify-content: space-around;
+  flex-direction: column;
   align-items: center;
+  justify-content: space-around;
   color: #606060;
+}
+
+.wide-button {
+  width: 150px; /* Adjust this value based on the content of your widest button */
+}
+
+.stack button {
+  flex: 1 0 auto;
 }
 
 .bg {
