@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useThree } from "@react-three/fiber";
+import { useThree } from "react-three-fiber";
 import { CubeTextureLoader } from "three";
 
 export const Skybox = () => {

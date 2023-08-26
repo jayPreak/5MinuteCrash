@@ -1,12 +1,13 @@
 import { PointerLockControls } from "three/examples/jsm/controls/PointerLockControls";
-import { extend, useThree } from "@react-three/fiber";
+import { extend, useThree } from "react-three-fiber";
 import { Skybox } from "../prefabs/SkyBox";
 import { useRef, useEffect } from "react";
-import { Physics } from "@react-three/rapier";
-// import { Physics } from "@react-three/cannon";
-import { Ground } from "../components/Ground";
-import { Player } from "../components/Player";
+// import { Physics } from "@react-three/rapier";
+import { Physics } from "@react-three/cannon";
+// import { Ground } from "../components/Ground";
+// import { Player } from "../components/Player";
 import { Plane } from "../components/Plane";
+import { PlayerCannon } from "../components/PlayerCannon";
 
 extend({ PointerLockControls });
 
@@ -46,9 +47,10 @@ export const Game = () => {
         iterations={50}
         broadphase={"SAP"}
       >
-        <Ground />
-        {/* <Plane /> */}
-        <Player />
+        {/* <Ground /> */}
+        <Plane />
+        {/* <Player /> */}
+        <PlayerCannon />
       </Physics>
     </>
   );
