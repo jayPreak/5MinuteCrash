@@ -1,7 +1,7 @@
 import * as THREE from "three";
 import * as RAPIER from "@dimforge/rapier3d-compat";
 import { useRef } from "react";
-import { useFrame } from "react-three-fiber";
+import { useFrame } from "@react-three/fiber";
 import { useKeyboardControls } from "@react-three/drei";
 import { CapsuleCollider, RigidBody, useRapier } from "@react-three/rapier";
 import Gun from "./Gun";
