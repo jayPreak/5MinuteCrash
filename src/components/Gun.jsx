@@ -10,10 +10,10 @@ title: Minecraft Diamond Axe
 import { useGLTF } from "@react-three/drei";
 
 export default function Gun(props) {
-  const { nodes, materials } = useGLTF("./pick.glb");
+  const { nodes, materials } = useGLTF("./senna.glb");
   // const { nodes, materials } = useGLTF(axeUrl)
-  // console.log(nodes);
-  // console.log(materials);
+  console.log(nodes);
+  console.log(materials);
   return (
     <group dispose={null} {...props}>
       <group rotation={[0, Math.PI / 1.8, 0.2]} scale={0.018}>

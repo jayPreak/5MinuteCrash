@@ -6,7 +6,8 @@ import * as THREE from "three";
 import { useEffect, useRef, useState } from "react";
 import { useFrame, useThree } from "@react-three/fiber";
 // import { CapsuleCollider, RigidBody, useRapier } from "@react-three/rapier";
-import Gun from "./Gun";
+// import Gun from "./Gun";
+import Senna from "./Senna";
 import Bullet from "./Bullet";
 import { useBox, useSphere } from "@react-three/cannon";
 import { Vector3, Raycaster } from "three";
@@ -223,9 +224,10 @@ export function Player() {
     <>
       <group
         ref={gun}
-        onPointerMissed={(e) => (gun.current.children[0].rotation.x = -0.8)}
+        onPointerMissed={(e) => (gun.current.children[0].rotation.x = 0.4)}
+        scale={0.05}
       >
-        <Gun position={[0.4, -0.2, 0.3]} />
+        <Senna position={[8, -4, 8]} rotation={[0, 3.2, 0]} />
       </group>
       {/** Renders bullets */}
       {bullets.map((bullet) => {

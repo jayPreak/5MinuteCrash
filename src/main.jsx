@@ -1,4 +1,5 @@
-import React from "react";
+/* eslint-disable no-unused-vars */
+import React, { useEffect } from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App.jsx";
 import "./index.css";
@@ -6,9 +7,23 @@ import { useState } from "react";
 
 function Overlay() {
   const [ready, set] = useState(false);
+  const [counter, setCounter] = useState(0);
+
+  useEffect(() => {
+    const storedCounter = localStorage.getItem("websiteOpenedCount");
+    const currentCounter = storedCounter ? parseInt(storedCounter, 10) : 0;
+    if (currentCounter < 10000) {
+      const newCounter = currentCounter + 1;
+      setCounter(newCounter);
+      localStorage.setItem("websiteOpenedCount", newCounter.toString());
+    } else {
+      setCounter(currentCounter); // Just set to the current value, don't increment
+    }
+  }, []);
   return (
     <>
       <App />
+
       {/* <div className="dot" /> */}
       <div
         className={`fullscreen bg ${ready ? "ready" : "notready"} ${
@@ -41,6 +56,9 @@ function Overlay() {
                 {/* <img src="https://flowbite.com/docs/images/logo.svg" className="h-8 mr-3" alt="Flowbite Logo" /> */}
                 <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
                   Jayesh Bhushan
+                  <div className="absolute bottom-4 left-4 text-xl font-bold text-white">
+                    Visits: {counter > 10000 ? "toomany :P" : counter}
+                  </div>
                 </span>
               </a>
               <ul className="flex flex-wrap items-center mb-6 text-sm font-medium text-gray-500 sm:mb-0 dark:text-gray-400">
