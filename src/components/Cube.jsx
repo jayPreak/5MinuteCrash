@@ -1,3 +1,6 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable react/prop-types */
+/* eslint-disable react/no-unknown-property */
 import React, { useMemo } from "react";
 import { useBox } from "@react-three/cannon";
 import niceColors from "nice-color-palettes";

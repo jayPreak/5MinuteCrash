@@ -1,12 +1,16 @@
+/* eslint-disable react/no-unknown-property */
+/* eslint-disable no-unused-vars */
 import { PointerLockControls } from "three/examples/jsm/controls/PointerLockControls";
 import { extend, useThree } from "@react-three/fiber";
 import { Skybox } from "../prefabs/SkyBox";
 import { useRef, useEffect } from "react";
-import { Physics } from "@react-three/rapier";
-// import { Physics } from "@react-three/cannon";
+// import { Physics } from "@react-three/rapier";
+import { Physics } from "@react-three/cannon";
 import { Ground } from "../components/Ground";
 import { Player } from "../components/Player";
 import { Plane } from "../components/Plane";
+import { Cube } from "../components/Cube";
+import Gun from "../components/Gun";
 
 extend({ PointerLockControls });
 
@@ -46,9 +50,20 @@ export const Game = () => {
         iterations={50}
         broadphase={"SAP"}
       >
-        <Ground />
-        {/* <Plane /> */}
+        {/* <Ground /> */}
+        <Plane />
         <Player />
+
+        <Cube position={[0, 0, -5]} layers={1} />
+        <Cube position={[-0.6, 0, -5]} />
+        <Cube position={[0.6, 0, -5]} />
+        <Cube position={[-0.3, 0.5, -5]} />
+        <Cube position={[0.3, 0.5, -5]} />
+        <Cube position={[0, 1, -5]} />
+        <Cube position={[-5, 0, -5]} />
+        <Cube position={[-5, 0.5, -5]} />
+        <Cube position={[-5, 1, -5]} />
+        <Cube position={[-5, 1.5, -5]} />
       </Physics>
     </>
   );

@@ -1,12 +1,13 @@
-// import { useSphere } from "@react-three/cannon";
-import React from "react";
+/* eslint-disable no-unused-vars */
+/* eslint-disable react/prop-types */
+/* eslint-disable react/no-unknown-property */
 import { useSphere } from "@react-three/cannon";
 
-export const Bullet = (props) => {
+const Bullet = (props) => {
   /** Bullet collider */
   const [sphereRef] = useSphere(() => ({
     mass: 5,
-    args: 0.1,
+    args: [0.1],
     ...props,
   }));
 
@@ -17,3 +18,4 @@ export const Bullet = (props) => {
     </mesh>
   );
 };
+export default Bullet;
