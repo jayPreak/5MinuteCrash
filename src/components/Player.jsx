@@ -7,7 +7,7 @@ import { useEffect, useRef, useState } from "react";
 import { useFrame, useThree } from "@react-three/fiber";
 // import { CapsuleCollider, RigidBody, useRapier } from "@react-three/rapier";
 // import Gun from "./Gun";
-import Senna from "./Senna";
+import Senna from "../models/Senna";
 import Bullet from "./Bullet";
 import { useBox, useSphere } from "@react-three/cannon";
 import { Vector3, Raycaster } from "three";

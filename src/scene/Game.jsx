@@ -11,12 +11,17 @@ import { Player } from "../components/Player";
 import { Plane } from "../components/Plane";
 import { Cube } from "../components/Cube";
 import Gun from "../components/Gun";
+import Enemy from "../components/Enemy";
+import { useState } from "react";
 
 extend({ PointerLockControls });
 
 export const Game = () => {
   const { camera, gl } = useThree();
   const controls = useRef();
+
+  const [enemies, setEnemies] = useState([]);
+  const [enemyCount, setEnemyCount] = useState(0);
 
   useEffect(() => {
     camera.layers.enable(0);
@@ -33,6 +38,23 @@ export const Game = () => {
       document.removeEventListener("click", handleFocus);
     };
   }, [gl]);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setEnemyCount((prevCount) => prevCount + 1);
+      setEnemies((prevEnemies) => [
+        ...prevEnemies,
+        <Enemy
+          key={enemyCount}
+          position={[Math.random() * 20 - 10, 0, Math.random() * 20 - 10]}
+        />,
+      ]);
+    }, 5000); // 5 seconds
+
+    return () => {
+      clearInterval(interval);
+    };
+  }, [enemyCount]);
   return (
     <>
       <Skybox />
@@ -54,16 +76,20 @@ export const Game = () => {
         <Plane />
         <Player />
 
-        <Cube position={[0, 0, -5]} layers={1} />
+        {/* <Cube position={[0, 0, -5]} layers={1} />
         <Cube position={[-0.6, 0, -5]} />
         <Cube position={[0.6, 0, -5]} />
         <Cube position={[-0.3, 0.5, -5]} />
         <Cube position={[0.3, 0.5, -5]} />
-        <Cube position={[0, 1, -5]} />
+        <Cube position={[0, 1, -5]} /> */}
         <Cube position={[-5, 0, -5]} />
         <Cube position={[-5, 0.5, -5]} />
         <Cube position={[-5, 1, -5]} />
         <Cube position={[-5, 1.5, -5]} />
+
+        <Enemy position={[-10, 0, -10]} />
+
+        {enemies}
       </Physics>
     </>
   );
