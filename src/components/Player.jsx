@@ -14,7 +14,7 @@ import { Vector3, Raycaster } from "three";
 
 import { useVariable } from "../hooks/useVariable";
 import { useMouseInput } from "../hooks/useMouseInput";
-import { useKeyboardInput } from "../hooks/useKeyboardInput";
+import { useKeyboardInput } from "../hooks/useKeyBoardInput";
 import { lerp } from "three/src/math/MathUtils";
 
 const speed = 300;
