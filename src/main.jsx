@@ -4,22 +4,35 @@ import ReactDOM from "react-dom/client";
 import App from "./App.jsx";
 import "./index.css";
 import { useState } from "react";
+import axios from "axios";
 
 function Overlay() {
   const [ready, set] = useState(false);
   const [counter, setCounter] = useState(0);
 
   useEffect(() => {
-    const storedCounter = localStorage.getItem("websiteOpenedCount");
-    const currentCounter = storedCounter ? parseInt(storedCounter, 10) : 0;
-    if (currentCounter < 10000) {
-      const newCounter = currentCounter + 1;
-      setCounter(newCounter);
-      localStorage.setItem("websiteOpenedCount", newCounter.toString());
-    } else {
-      setCounter(currentCounter); // Just set to the current value, don't increment
-    }
+    axios
+      .get("https://zerofighterbackend.onrender.com/increment")
+      .then((response) => {
+        setCounter(response.data.counter);
+        console.log("Counter incremented", response.data.counter);
+      })
+      .catch((error) => {
+        console.error("Could not increment counter", error);
+      });
   }, []);
+
+  // useEffect(() => {
+  //   const storedCounter = localStorage.getItem("websiteOpenedCount");
+  //   const currentCounter = storedCounter ? parseInt(storedCounter, 10) : 0;
+  //   if (currentCounter < 10000) {
+  //     const newCounter = currentCounter + 1;
+  //     setCounter(newCounter);
+  //     localStorage.setItem("websiteOpenedCount", newCounter.toString());
+  //   } else {
+  //     setCounter(currentCounter); // Just set to the current value, don't increment
+  //   }
+  // }, []);
   return (
     <>
       <App />
