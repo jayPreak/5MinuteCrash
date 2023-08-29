@@ -72,9 +72,9 @@ const Enemy = (props) => {
     args: [0.5, 1, 0.5],
     material: {
       friction: 1,
-      restitution: 0,
+      restitution: 0
     },
-    ...props,
+    ...props
   }));
 
   const [targetPosition] = useState([0, 0, 0]);
@@ -91,10 +91,11 @@ const Enemy = (props) => {
         );
 
         // Check if the object is close enough to stop
-        if (distance < 0.05) {
+        if (distance < 1) {
+          // props.onReachedDestination(props.id);
           clearInterval(interval);
-          return;
         }
+        // console.log(distance);
 
         const step = 0.03;
         const newX = x > tx ? x - step : x + step;

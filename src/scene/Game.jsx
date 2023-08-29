@@ -19,6 +19,8 @@ extend({ PointerLockControls });
 export const Game = () => {
   const { camera, gl } = useThree();
   const controls = useRef();
+  const [targetPosition] = useState([0, 0, 0]);
+  const [hasReachedDestination, setHasReachedDestination] = useState(false);
 
   const [enemies, setEnemies] = useState([]);
   const [enemyCount, setEnemyCount] = useState(0);
@@ -44,10 +46,14 @@ export const Game = () => {
       setEnemyCount((prevCount) => prevCount + 1);
       setEnemies((prevEnemies) => [
         ...prevEnemies,
-        <Enemy
-          key={enemyCount}
-          position={[Math.random() * 20 - 10, 0, Math.random() * 20 - 10]}
-        />,
+        {
+          id: enemyCount,
+          position: [Math.random() * 20 - 10, 0, Math.random() * 20 - 10]
+        }
+        // <Enemy
+        //   key={enemyCount}
+        //   position={[Math.random() * 20 - 10, 0, Math.random() * 20 - 10]}
+        // />
       ]);
     }, 5000); // 5 seconds
 
@@ -55,6 +61,13 @@ export const Game = () => {
       clearInterval(interval);
     };
   }, [enemyCount]);
+  console.log(enemies);
+  // const onEnemyReachedDestination = (enemyId) => {
+  //   setEnemies((prevEnemies) =>
+  //     prevEnemies.filter((enemy) => enemy.id !== enemyId)
+  //   );
+  // };
+
   return (
     <>
       <Skybox />
@@ -89,7 +102,14 @@ export const Game = () => {
 
         <Enemy position={[-10, 0, -10]} />
 
-        {enemies}
+        {enemies.map((enemy) => (
+          <Enemy
+            key={enemy.id}
+            position={enemy.position}
+            id={enemy.id} // Make sure to pass id
+            // onReachedDestination={onEnemyReachedDestination}
+          />
+        ))}
       </Physics>
     </>
   );

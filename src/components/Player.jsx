@@ -31,11 +31,11 @@ export function Player() {
   const [sphereRef, api] = useSphere(() => ({
     mass: 1,
     fixedRotation: true,
-    position: [0, 1, 0],
-    args: [0.2], // <--- Enclose your radius in an array
+    position: [0, 2.5, 0],
+    args: [0.1], // <--- Enclose your radius in an array
     material: {
-      friction: 0,
-    },
+      friction: 0
+    }
   }));
   //gun
   const gun = useRef();
@@ -58,7 +58,7 @@ export function Player() {
     timeToShoot: 0,
     timeTojump: 0,
     vel: [0, 0, 0],
-    jumping: false,
+    jumping: false
   });
   console.log(state);
 
@@ -180,8 +180,8 @@ export function Player() {
           {
             id: now,
             position: [bulletPosition.x, bulletPosition.y, bulletPosition.z],
-            forward: [bulletDirection.x, bulletDirection.y, bulletDirection.z],
-          },
+            forward: [bulletDirection.x, bulletDirection.y, bulletDirection.z]
+          }
         ]);
       }
     }
