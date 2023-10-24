@@ -71,7 +71,7 @@ function Terrain () {
       />
       <meshBasicMaterial
         attach='material'
-        color='red'
+        color='violet'
         roughness={1}
         metalness={0}
         wireframe
@@ -178,7 +178,7 @@ function Enemies () {
       {enemies.map(enemy => (
         <mesh position={[enemy.x, enemy.y, enemy.z]} key={`${enemy.x}`}>
           <sphereBufferGeometry attach='geometry' args={[2, 8, 8]} />
-          <meshStandardMaterial attach='material' color='white' wireframe />
+          <meshStandardMaterial attach='material' color='white' />
         </mesh>
       ))}
     </group>
