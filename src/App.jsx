@@ -1,7 +1,12 @@
-import React, { Suspense, useRef } from 'react'
+import React, { Suspense, useRef, useState, useEffect } from 'react'
 import * as THREE from 'three'
 import { Canvas, useLoader, useFrame } from '@react-three/fiber'
-import { RecoilRoot, useRecoilState, useRecoilValue } from 'recoil'
+import {
+  RecoilRoot,
+  useRecoilState,
+  useRecoilValue,
+  useSetRecoilState
+} from 'recoil'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 import { TextureLoader } from 'three'
 import {
@@ -100,7 +105,6 @@ function ArWing () {
   })
 
   const { nodes } = useLoader(GLTFLoader, 'models/arwing.glb')
-  console.log(nodes)
   return (
     <group ref={ship}>
       <mesh visible geometry={nodes.Default.geometry}>
@@ -146,9 +150,29 @@ function Target () {
   )
 }
 
-// Manages Drawing enemies that currently exist in state
+function getRandomInt (min, max) {
+  min = Math.ceil(min)
+  max = Math.floor(max)
+  return Math.floor(Math.random() * (max - min + 1)) + min
+}
+
 function Enemies () {
   const enemies = useRecoilValue(enemyPositionState)
+  const setEnemyPositions = useSetRecoilState(enemyPositionState)
+
+  useEffect(() => {
+    const updateEnemies = () => {
+      const newEnemy = {
+        x: getRandomInt(-70, 70),
+        y: getRandomInt(0, 30),
+        z: getRandomInt(-80, -150)
+      }
+      setEnemyPositions(prevEnemies => [...prevEnemies, newEnemy])
+    }
+    const intervalID = setInterval(updateEnemies, 1500)
+
+    return () => clearInterval(intervalID)
+  }, [])
   return (
     <group>
       {enemies.map(enemy => (
@@ -200,8 +224,8 @@ function Lasers () {
     <group>
       {lasers.map(laser => (
         <mesh position={[laser.x, laser.y, laser.z]} key={`${laser.id}`}>
-          <boxBufferGeometry attach='geometry' args={[1, 1, 1]} />
-          <meshStandardMaterial attach='material' emissive='white' wireframe />
+          <sphereBufferGeometry attach='geometry' args={[0.5, 32, 16]} />
+          <meshStandardMaterial attach='material' emissive='red' />
         </mesh>
       ))}
     </group>
@@ -218,7 +242,7 @@ function distance (p1, p2) {
   return Math.sqrt(a * a + b * b + c * c)
 }
 // This component runs game logic on each frame draw to update game state.
-function GameTimer () {
+function GameTimer ({ setGameScore }) {
   const [enemies, setEnemies] = useRecoilState(enemyPositionState)
   const [lasers, setLaserPositions] = useRecoilState(laserPositionState)
   const [score, setScore] = useRecoilState(scoreState)
@@ -238,7 +262,8 @@ function GameTimer () {
 
     if (hitEnemies.includes(true) && enemies.length > 0) {
       setScore(score + 1)
-      console.log('hit detected')
+      setGameScore(score + 1)
+      console.log('hit detected', score)
     }
 
     // Move all of the enemies. Remove enemies that have been destroyed, or passed the player.
@@ -262,8 +287,8 @@ function GameTimer () {
   })
   return null
 }
-
 export default function App () {
+  const [gameScore, setGameScore] = useState(0)
   return (
     <>
       <Canvas style={{ background: 'black' }}>
@@ -278,12 +303,12 @@ export default function App () {
           <Enemies />
           <Lasers />
           <LaserController />
-          <GameTimer />
+          <GameTimer setGameScore={setGameScore} />
         </RecoilRoot>
       </Canvas>
 
       <a className='score' target='_blank' rel='noopener noreferrer'>
-        Score
+        Score {gameScore}
       </a>
     </>
   )
