@@ -71,7 +71,7 @@ function Terrain () {
       />
       <meshBasicMaterial
         attach='material'
-        color='green'
+        color='red'
         roughness={1}
         metalness={0}
         wireframe
@@ -110,7 +110,7 @@ function ArWing () {
       <mesh visible geometry={nodes.Default.geometry}>
         <meshStandardMaterial
           attach='material'
-          color='white'
+          color='#f0b2bc'
           roughness={1}
           metalness={0}
         />
